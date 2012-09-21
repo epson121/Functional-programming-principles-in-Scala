@@ -29,11 +29,18 @@ object Main {
    * Exercise 2
    */
   def balance(chars: List[Char]): Boolean =
-  {	 
+  {	
     var x = 0
-    chars.foreach(char => if (char == ('(')) x +=1 else if (char == (')')) {if (x < 0) return false else if (x >= 0) x -= 1})
-    if (x == 0) true
-    else false
+    def help(chars: List[Char]) : Int = 
+    {
+		if (chars.head == '(') x += 1
+		if (chars.head == ')') x -= 1 
+		if (x < 0) -1
+		if (!chars.tail.isEmpty) help(chars.tail)
+	    x
+    }
+    help(chars)
+	x == 0
   }
   
   /**
